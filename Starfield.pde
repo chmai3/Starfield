@@ -1,13 +1,19 @@
-Particle[]bob;
+normalParticle[] bob;
+oddballParticle[] dub;
+jumboParticle[] cub;
+
 void setup()
 {
-  size(300,300)
-  background(0);
-  bob = new Particle[100];
+  size(300,300);
+  background(31,70,219);
+  bob = new normalParticle[100];
   for(int i = 0; i < bob.length; i++)
   {
-    bob[i] = new Particle();
+    bob[i] = new normalParticle();
   }
+  dub = new oddballParticle();
+  cub = new jumboParticle();
+  
 }
 void draw()
 {
@@ -17,10 +23,10 @@ void draw()
     bob[i].show();
   }
 }
-class NormalParticle //constructor
+class normalParticle //constructor
 {
   double x,y,dSpeed, dDirection;
-  Particle(x,y)
+  normalParticle()
   {
     x= (int)(Math.random()*300);
     y =(int)(Math.random()*300);
@@ -29,18 +35,24 @@ class NormalParticle //constructor
   }
   void move(){
     x = x +(Math.cos(dDirection) * dSpeed);
+    y = y +(Math.sin(dDirection) * dSpeed);
+  }
+  void show(){
+    ellipse((float)x,(float)y,10,10);
+  }
    
 }
-interface Particle
+interface particle
+{ 
+  public void show();
+  public void move();
+ 
+}
+class oddballParticle implements particle //uses an interface
+{
+  rect(200,300,200,200);
+}
+class jumboParticle implements particle //uses inheritance
 {
   
 }
-class OddballParticle //uses an interface
-{
-  //your code here
-}
-class JumboParticle //uses inheritance
-{
-  //your code here
-}
-
